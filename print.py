@@ -55,43 +55,40 @@ import pandas as pd
 import numpy as np
 
 frame_pc = pd.read_json("pc.json")
-print(f'This is file pc.json : \n \n {frame_pc} \n')
+# print(f'This is file pc.json : \n \n {frame_pc} \n')
 
 frame_orders = pd.read_csv("orders.csv")
-print(f'This is file orders.csv : \n \n {frame_orders} \n')
+# print(f'This is file orders.csv : \n \n {frame_orders} \n')
 
 frame_order_details = pd.read_csv("order_details.csv")
-print(f'This is file order_details.csv : \n \n {frame_order_details} \n')
+# print(f'This is file order_details.csv : \n \n {frame_order_details} \n')
 
 # Questions 1 - To calculate the freight costs in July 2021
 
 freight_costs = frame_orders['freight']
 
-print(f'This is the column of freight costs: \n \n {freight_costs} \n')
+# print(f'This is the column of freight costs: \n \n {freight_costs} \n')
 
-print(f'The freight costs in July 2021 were ($): {freight_costs.sum()} \n')
+print(f'Question 1 - The freight costs in July 2021 is ($): {freight_costs.sum()} \n')
 
 # Question 2 - To find the countries with the most orders
 
-# country = frame_orders['ship_country']
+country_count = frame_orders['ship_country'].value_counts()
+# print(country_count)
 
-# print(f'This is the country using header function with max 60: \n \n{country_sort.head(60)}')
-# print(f'This is the country using describe function: \n \n{country_sort.describe}')
+print(f'Question 2 - The 5 countries with the highest number of orders in July 2021: {country_count.head(5)} \n')
 
-# print(f'This is the column of countries: \n \n{country} \n')
+""" 
+# Alternative options for obtaining the solution (2 examples):
 
-# print(f'The sort by country is: \n \n{country_sort} \n')
-
-for name, group in frame_orders.groupby('ship_country'):  # perhaps need to use if/then function to restrict to n>=20 rows (eg Germany & USA)
+for name, group in frame_orders.groupby('ship_country'):
     print(name)
     print(group)
 
 for name in frame_orders['ship_country']:
     print(name)
+"""
 
+# Question 3 - To find the 3 customers with the highest number of orders
 
-
-
-# doesn't work as string variable:  print(f'The count of country for shipping: {country.sum()} \n')
-# print(country.groupby(['ship_country']))
 
