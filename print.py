@@ -94,5 +94,47 @@ for name in frame_orders['ship_country']:
 customer_name_count = frame_orders['customer_name'].value_counts()
 # print(f'The number of orders per customer in July 2021 is: \n{customer_name_count}\n')
 
-print(f'Question 2 - The 3 customers with the highest number of orders in July 2021: \n{customer_name_count.head(3)}\n')
+print(f'Question 3 - The 3 customers with the highest number of orders in July 2021: \n{customer_name_count.head(3)}\n')
 
+# Question 4 - To find the product category with the highest sales revenue
+
+"""
+Steps - In data file 'order_details.csv':
+1.  The total cost per order is calculated as -
+        total_cost = unit_price x quantity,
+        total_cost will be a new variable (column).
+2.  Use the Pandas 'groupby' function to obtain product_category_id revenue for July 2021.
+3.  Obtain the highest revenue amount using NumPy's 'max' function, then select it's product category by filtering in pandas.
+4.  Select the "category_name" in 'pc.json' for the product category with the highest revenue amount. 
+"""
+
+# Step 1:
+
+a = frame_order_details['unit_price']
+b = frame_order_details['quantity']
+frame_order_details['total_cost'] = a * b  # 'total_cost' is a new variables in frame_order_details
+
+# print(a, b)
+
+# print(frame_order_details['total_cost'])
+
+# Step 2:
+
+product_category_id_revenue = frame_order_details[['product_category_id', 'total_cost']].groupby(['product_category_id']).sum()
+print(product_category_id_revenue)
+
+# Step 3:
+
+highest_revenue_amount = product_category_id_revenue['total_cost'].max()  # 'highest_revenue_amount' is a new variable
+x = product_category_id_revenue[product_category_id_revenue['total_cost'] == highest_revenue_amount]  # filtering
+print(f'\n{x}\n')
+
+# step 4:
+
+# print(product_category_id_revenue['product_category_id'])
+
+for j, k in frame_pc.items():  # refer to lecture 7 and workshop codes in Python for selecting 'product_name' with 'category_id' == x['product_category_id']
+    print(j, k)
+
+# y = frame_pc.get("category_id", "1")
+# print(y)
