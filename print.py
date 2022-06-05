@@ -103,9 +103,21 @@ for j, k in x.items():
 
 # step 5 - Select the item with maximum value from within the list of dictionaries 'product_category_revenue':
 
-for i in frame_pc.items():
-    if i["total_cost"] == 'p':
+"""
+for i in frame_pc:
+    if i["product_revenue"] == p:
         frame_pc = i
         print(i)
-        print(f"{frame_pc['category_name']} contributed to the highest revenue of {frame_pc['total_cost']}.")
+        print(f"{frame_pc['category_name']} contributed to the highest revenue of {frame_pc['product_revenue']}.")
+"""
 
+z = {'product_revenue': [p]}
+q = frame_pc.isin(z)
+print(f'Questions 4 - The product category with the highest revenue: \n \n{q}\n')
+
+r = frame_pc[frame_pc.isin([p])]
+print(r)
+
+
+g = frame_pc['category_name']
+print(f'\n{g}\n')
